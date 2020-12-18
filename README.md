@@ -1,5 +1,6 @@
 # Razen
 ## Random Zen Meditation App
+<img src="/razen_logo.jpg" width="184" height="250">
 
 ## Installation
 ```{bash}
@@ -10,12 +11,4 @@ pip install -r requirements
 ## Usage  
 ```{bash}
 python razen.py # opens up GUI
-```
-
-[Logo]("/razen_logo.jpg")
-
-### Examples of install cmds
-```{bash}
-xargs -a $(awk '/^\s*[^#]/' "$requirements") -r -- sudo apt-get -y install
-xargs -a <(awk '! /^ *(#|$)/' "$packagelist") -r -- sudo apt-get install
 ```
