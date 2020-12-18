@@ -6,6 +6,9 @@ from kivy.properties import ListProperty
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.core.window import Window
+
+Window.size = (1024//2, 768//2)
 
 import sys
 import time
@@ -186,104 +189,120 @@ MyScreenManager:
     name: 'main'
     BoxLayout:
         orientation: 'vertical'
-        Label:
-            text: 'Razen (Random Zen) Meditation App'
-            font_size: 30
+        # Label:
+        #     text: 'Razen: Random Zen Meditation App'
+        #     font_size: 20
+        #     size_hint_y: 0.4
         Image:
             source: 'razen_logo.jpg'
             allow_stretch: True
             keep_ratio: True
         BoxLayout:
+            size_hint_y: 0.17
             Button:
                 text: 'Start Razen'
-                font_size: 30
+                font_size: 28
                 on_release: app.root.new_colour_screen()
             Button:
                 text: 'Settings'
-                font_size: 30
+                font_size: 28
                 on_release: app.root.current = 'settings'
 <SecondScreen>:
     name: 'settings'
     BoxLayout:
         orientation: 'vertical'
-        Label:
-            text: 'Settings'
-            font_size: 30
-        BoxLayout:
-            Button:
-                text: 'min time (seconds)'
-            TextInput:
-                id: min
-        BoxLayout:
-            Button:
-                text: 'max time (seconds)'
-            TextInput:
-                id: max
-        BoxLayout:
-            Button:
-                text: 'mean (seconds)'
-            TextInput:
-                id: mean
-        BoxLayout:
-            Button:
-                text: 'standard deviation (seconds)'
-            TextInput:
-                id: std
         Image:
-            source: 'razen_logo.jpg'
+            source: 'brain.jpg'
             allow_stretch: True
             keep_ratio: True
         BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.5
+            BoxLayout:
+                Button:
+                    text: 'min time (seconds)'
+                TextInput:
+                    id: min
+            BoxLayout:
+                Button:
+                    text: 'max time (seconds)'
+                TextInput:
+                    id: max
+            BoxLayout:
+                Button:
+                    text: 'mean (seconds)'
+                TextInput:
+                    id: mean
+            BoxLayout:
+                Button:
+                    text: 'standard deviation (seconds)'
+                TextInput:
+                    id: std
+        BoxLayout:
+            size_hint_y: 0.25
             Button:
                 text: 'Start Razen'
                 font_size: 20
                 on_release: app.root.new_colour_screen()
+                # size_hint_y: 0.5
             Button:
-                text: 'Update Values'
+                text: 'Update'
                 font_size: 20
                 on_release: app.root.get_screen('settings').update_values()
+                # size_hint_y: 0.5
             Button:
-                text: 'Restore Defaults'
+                text: 'Use Defaults'
                 font_size: 20
                 on_release: app.root.get_screen('settings').restore_defaults()
+                # size_hint_y: 0.5
             Button:
                 text: 'Back'
                 font_size: 20
                 on_release: app.root.current = 'main'
+                # size_hint_y: 0.5
 <RazenTimer>:
     BoxLayout:
         orientation: 'vertical'
-        Label:
-            text: 'Params: {}, {}, {}, {}'.format(*app.root.get_screen('settings').params.items())
-            font_size: 16
-        Widget:
-            canvas:
-                Color:
-                    rgba: root.colour
-                Ellipse:
-                    pos: self.pos
-                    size: self.size
-
+        Image:
+            source: 'zenstroke.jpg'
+            allow_stretch: True
+            keep_ratio: True
+        # Label:
+        #     text: 'When you hear the gong, begin!' #'Params: {}, {}, {}, {}'.format(*app.root.get_screen('settings').params.items())
+        #     font_size: 16
+        #     size_hint_y: 0.1
+        # BoxLayout:
+        # Widget:
+        #     canvas:
+        #         Color:
+        #             rgba: root.colour
+        #         Ellipse:
+        #             pos: self.pos
+        #             size: self.size
         BoxLayout:
+            size_hint_y: 0.17
             Button:
                 text: 'Stop Razen'
-                font_size: 30
+                font_size: 25
                 on_release: app.root.stop_timer()
+                # size_hint_y: 0.5
             Button:
                 text: 'Reroll Razen'
-                font_size: 30
+                font_size: 25
                 on_release: app.root.new_colour_screen()
+                # size_hint_y: 0.5
             Button:
                 text: 'Back'
-                font_size: 30
+                font_size: 25
                 on_release: app.root.current = 'main'
+                # size_hint_y: 0.5
 <ExitScreen>:
     name: 'ExitScreen'
     BoxLayout:
         orientation: 'vertical'
         Label:
             text: 'Congratulations! Razen practice has ended.'
-            font_size: 30
+            font_size: 28
         Image:
             source: 'razen_logo.jpg'
             allow_stretch: True
@@ -291,11 +310,11 @@ MyScreenManager:
         BoxLayout:
             Button:
                 text: 'Back'
-                font_size: 30
+                font_size: 28
                 on_release: app.root.current = 'main'
             Button:
                 text: 'Reroll Razen'
-                font_size: 30
+                font_size: 28
                 on_release: app.root.new_colour_screen()
 
 ''')
