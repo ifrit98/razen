@@ -14,6 +14,8 @@ import threading
 
 sound_path = 'gong.mp3'
 
+# TODO: README!
+
 clamp  = lambda val, minv, maxv: max(min(val, maxv), minv)
 sample = lambda mu, sigma, lo, hi: int(clamp(abs(random.gauss(mu, sigma)), lo, hi))
 
@@ -28,7 +30,7 @@ class Timer(threading.Thread):
     def run(self):
         global sound_path
         print("Take a few deep breaths")
-        for i in reversed(range(8)):
+        for i in reversed(range(7)):
             print(i)
             time.sleep(1)
         print("Start of practice!")
@@ -134,7 +136,9 @@ class MyScreenManager(ScreenManager):
         global TIMER
         TIMER.killed = True
 
-        self.get_screen('settings').restore_defaults()
+        scn = self.get_screen('settings')
+        if not scn.__dict__.get('params', None):
+            scn.restore_defaults()
 
         name = 'RazenTimer'
         s = RazenTimer(name=name,
